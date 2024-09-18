@@ -6,6 +6,7 @@ extern crate rlibc;
 
 pub use rlibc::*;
 
+#[cfg(any(target_os="dos", docsrs))]
 use core::ffi::{c_int, c_char, c_float, c_ulonglong};
 
 #[cfg(any(target_os="dos", docsrs))]

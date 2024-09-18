@@ -1,0 +1,19 @@
+[package]
+edition = "2021"
+name = "rlibc-ext"
+version = "0.1.0"
+rust-version = "1.81"
+authors = ["warlock <internalmike@gmail.com>"]
+description = "Atomics for DOS target."
+readme = "README.md"
+documentation = "https://docs.rs/pc-atomics/"
+keywords = ["strlen", "windows", "no_std", "dos", "memcpy"]
+categories = ["os", "no-std"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/A1-Triard/rlibc-ext"
+
+[dependencies]
+rlibc = "1.0.0"
+
+[badges]
+maintenance = { status = "experimental" }

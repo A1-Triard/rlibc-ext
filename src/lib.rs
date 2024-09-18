@@ -15,6 +15,7 @@ pub extern "C" fn _chkstk() { }
 #[used]
 pub static mut _fltused: c_int = 0;
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
     let mut n = s;
@@ -24,6 +25,7 @@ pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
     n.offset_from(s) as usize
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
     if x.is_nan() { return y; }
@@ -31,11 +33,13 @@ pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
     if x < y { x } else { y }
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn _aulldiv(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a / b
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn _aullrem(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a % b

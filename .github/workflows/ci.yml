@@ -30,6 +30,16 @@ jobs:
     - run: "cargo test --verbose --tests"
     - run: "cargo test --verbose --doc"
     - run: "cargo doc --verbose"
+    - name: "cargo test --docsrs"
+      run: "cargo test --verbose --doc"
+      env:
+        RUSTFLAGS: "--cfg docsrs"
+        RUSTDOCFLAGS: "--cfg docsrs"
+    - name: "cargo docsrs"
+      run: "cargo doc --verbose"
+      env:
+        RUSTFLAGS: "--cfg docsrs"
+        RUSTDOCFLAGS: "--cfg docsrs"
     - run: "cargo build --verbose --release"
     - run: "cargo outdated --verbose --root-deps-only --exit-code 1"
     - run: "cargo clippy --verbose"

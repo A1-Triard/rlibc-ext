@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "rlibc-ext"
-version = "0.1.0"
+version = "0.1.1"
 rust-version = "1.81"
 authors = ["warlock <internalmike@gmail.com>"]
 description = "A bare-metal library supplying certain libc functions."
@@ -11,6 +11,10 @@ keywords = ["strlen", "windows", "no_std", "dos", "memcpy"]
 categories = ["os", "no-std"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/A1-Triard/rlibc-ext"
+
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 rlibc = "1.0.0"

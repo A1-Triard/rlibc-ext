@@ -8,13 +8,16 @@ pub use rlibc::*;
 
 use core::ffi::{c_int, c_char, c_float, c_ulonglong};
 
+#[cfg(any(target_os="dos", docsrs))]
 #[no_mangle]
 pub extern "C" fn _chkstk() { }
 
+#[cfg(any(target_os="dos", docsrs))]
 #[no_mangle]
 #[used]
 pub static mut _fltused: c_int = 0;
 
+#[cfg(any(target_os="dos", docsrs))]
 #[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
@@ -25,6 +28,7 @@ pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
     n.offset_from(s) as usize
 }
 
+#[cfg(any(target_os="dos", docsrs))]
 #[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
@@ -33,25 +37,16 @@ pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
     if x < y { x } else { y }
 }
 
+#[cfg(any(target_os="dos", docsrs))]
 #[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn _aulldiv(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a / b
 }
 
+#[cfg(any(target_os="dos", docsrs))]
 #[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn _aullrem(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a % b
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = unsafe { _aulldiv(2, 2) };
-        assert_eq!(result, 1);
-    }
 }

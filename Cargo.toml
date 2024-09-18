@@ -12,6 +12,9 @@ categories = ["os", "no-std"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/A1-Triard/rlibc-ext"
 
+[lints.rust]
+unexpected_cfgs = { level = "allow" }
+
 [package.metadata.docs.rs]
 rustc-args = ["--cfg", "docsrs"]
 rustdoc-args = ["--cfg", "docsrs"]

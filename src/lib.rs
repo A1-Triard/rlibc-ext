@@ -148,22 +148,3 @@ unsafe extern "C" fn __atomic_store_8(dest: *mut u64, src: u64, _model: c_int) {
     *dest = src;
     asm!("sti", "nop");
 }
-
-#[cfg(any(target_os="dos", docsrs))]
-#[allow(clippy::missing_safety_doc)]
-#[no_mangle]
-unsafe extern "C" fn __atomic_load_16(src: *const u128, _model: c_int) -> u128 {
-    asm!("cli");
-    let dest = *src;
-    asm!("sti", "nop");
-    dest
-}
-
-#[cfg(any(target_os="dos", docsrs))]
-#[allow(clippy::missing_safety_doc)]
-#[no_mangle]
-unsafe extern "C" fn __atomic_store_16(dest: *mut u128, src: u128, _model: c_int) {
-    asm!("cli");
-    *dest = src;
-    asm!("sti", "nop");
-}

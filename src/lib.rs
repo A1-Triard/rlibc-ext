@@ -57,6 +57,20 @@ pub unsafe extern "C" fn _aullrem(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong
 #[cfg(any(target_os="dos", docsrs))]
 #[allow(clippy::missing_safety_doc)]
 #[no_mangle]
+pub unsafe extern "C" fn _alldiv(a: c_longlong, b: c_longlong) -> c_longlong {
+    a / b
+}
+
+#[cfg(any(target_os="dos", docsrs))]
+#[allow(clippy::missing_safety_doc)]
+#[no_mangle]
+pub unsafe extern "C" fn _allrem(a: c_longlong, b: c_longlong) -> c_longlong {
+    a % b
+}
+
+#[cfg(any(target_os="dos", docsrs))]
+#[allow(clippy::missing_safety_doc)]
+#[no_mangle]
 pub unsafe extern "C" fn __atomic_load(src: *const usize, _model: c_int) -> usize {
     asm!("cli");
     let dest = *src;

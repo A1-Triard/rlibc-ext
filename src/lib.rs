@@ -9,7 +9,7 @@ pub use rlibc::*;
 #[cfg(any(target_os="dos", docsrs))]
 use core::arch::asm;
 #[cfg(any(target_os="dos", docsrs))]
-use core::ffi::{c_int, c_char, c_float, c_ulonglong};
+use core::ffi::{c_int, c_char, c_float, c_ulonglong, c_longlong};
 
 #[cfg(any(target_os="dos", docsrs))]
 #[no_mangle]

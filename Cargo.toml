@@ -1,8 +1,8 @@
 [package]
 edition = "2021"
 name = "rlibc-ext"
-version = "0.2.3"
-rust-version = "1.81"
+version = "0.3.0"
+rust-version = "1.91"
 authors = ["warlock <internalmike@gmail.com>"]
 description = "A bare-metal library supplying certain libc functions."
 readme = "README.md"

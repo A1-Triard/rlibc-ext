@@ -9,20 +9,20 @@ pub use rlibc::*;
 #[cfg(any(dos, docsrs))]
 use core::arch::asm;
 #[cfg(any(dos, docsrs))]
-use core::ffi::{c_int, c_char, c_float, c_ulonglong, c_longlong};
+use core::ffi::{c_int, c_char, c_double, c_float, c_ulonglong, c_longlong};
 
 #[cfg(any(dos, docsrs))]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn _chkstk() { }
 
 #[cfg(any(dos, docsrs))]
-#[no_mangle]
+#[unsafe(no_mangle)]
 #[used]
 pub static mut _fltused: c_int = 0;
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
     let mut n = s;
     while *n != 0 {
@@ -33,7 +33,7 @@ pub unsafe extern "C" fn strlen(s: *const c_char) -> usize {
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
     if x.is_nan() { return y; }
     if y.is_nan() { return x; }
@@ -42,35 +42,49 @@ pub extern "C" fn fminf(x: c_float, y: c_float) -> c_float {
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
+pub extern "C" fn fmaf(x: c_float, y: c_float, z: c_float) -> c_float {
+    (x * y) + z
+}
+
+#[cfg(any(dos, docsrs))]
+#[allow(clippy::missing_safety_doc)]
+#[unsafe(no_mangle)]
+pub extern "C" fn fma(x: c_double, y: c_double, z: c_double) -> c_double {
+    (x * y) + z
+}
+
+#[cfg(any(dos, docsrs))]
+#[allow(clippy::missing_safety_doc)]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn _aulldiv(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a / b
 }
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn _aullrem(a: c_ulonglong, b: c_ulonglong) -> c_ulonglong {
     a % b
 }
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn _alldiv(a: c_longlong, b: c_longlong) -> c_longlong {
     a / b
 }
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn _allrem(a: c_longlong, b: c_longlong) -> c_longlong {
     a % b
 }
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_load(src: *const usize, _model: c_int) -> usize {
     asm!("cli");
     let dest = *src;
@@ -80,7 +94,7 @@ pub unsafe extern "C" fn __atomic_load(src: *const usize, _model: c_int) -> usiz
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_store(dest: *mut usize, src: usize, _model: c_int) {
     asm!("cli");
     *dest = src;
@@ -89,7 +103,7 @@ pub unsafe extern "C" fn __atomic_store(dest: *mut usize, src: usize, _model: c_
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_load_1(src: *const u8, _model: c_int) -> u8 {
     asm!("cli");
     let dest = *src;
@@ -99,7 +113,7 @@ pub unsafe extern "C" fn __atomic_load_1(src: *const u8, _model: c_int) -> u8 {
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_store_1(dest: *mut u8, src: u8, _model: c_int) {
     asm!("cli");
     *dest = src;
@@ -108,7 +122,7 @@ pub unsafe extern "C" fn __atomic_store_1(dest: *mut u8, src: u8, _model: c_int)
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_load_2(src: *const u16, _model: c_int) -> u16 {
     asm!("cli");
     let dest = *src;
@@ -118,7 +132,7 @@ pub unsafe extern "C" fn __atomic_load_2(src: *const u16, _model: c_int) -> u16 
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_store_2(dest: *mut u16, src: u16, _model: c_int) {
     asm!("cli");
     *dest = src;
@@ -127,7 +141,7 @@ pub unsafe extern "C" fn __atomic_store_2(dest: *mut u16, src: u16, _model: c_in
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_load_4(src: *const u32, _model: c_int) -> u32 {
     asm!("cli");
     let dest = *src;
@@ -137,7 +151,7 @@ pub unsafe extern "C" fn __atomic_load_4(src: *const u32, _model: c_int) -> u32 
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_store_4(dest: *mut u32, src: u32, _model: c_int) {
     asm!("cli");
     *dest = src;
@@ -146,7 +160,7 @@ pub unsafe extern "C" fn __atomic_store_4(dest: *mut u32, src: u32, _model: c_in
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_load_8(src: *const u64, _model: c_int) -> u64 {
     asm!("cli");
     let dest = *src;
@@ -156,7 +170,7 @@ pub unsafe extern "C" fn __atomic_load_8(src: *const u64, _model: c_int) -> u64 
 
 #[cfg(any(dos, docsrs))]
 #[allow(clippy::missing_safety_doc)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn __atomic_store_8(dest: *mut u64, src: u64, _model: c_int) {
     asm!("cli");
     *dest = src;
